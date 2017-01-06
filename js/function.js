@@ -37,3 +37,32 @@ function convertFileToDataURLviaFileReader(url, callback) {
     xhr.open('GET', url);
     xhr.send();
 }
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+
+function previewImageUploaded (context) {
+
+    if(context.files && context.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {  
+
+            var image = new Image();
+            image.onload = function() {
+                ctx.drawImage(image, 0, 0);
+                draw()
+            };
+            image.src = e.target.result; 
+            picture_base64 = e.target.result;
+
+        }
+        reader.readAsDataURL(context.files[0]);
+    }
+}

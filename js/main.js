@@ -1,9 +1,10 @@
 
 var canvas, ctx,
-    text,label, color, picture_base64;
+    text, author, color, picture_base64, font_size = 100;
 
-var LETTER_SPACING = 40;
+var LETTER_SPACING = 20;
 var PADDING_SIDE = 200;
+
 
 function init () {
     canvas = document.getElementById('cvs');
@@ -13,17 +14,41 @@ function init () {
     ctx = canvas.getContext('2d');
 
     $text = document.getElementById('text');
-    $label = document.getElementById('label');
     $valid = document.getElementById('valid');
     $color = document.getElementById('color');
     $download = document.getElementById('download');
+    $file = document.getElementById('file');
+    $author = document.getElementById('author');
+    $font_up = document.getElementById('font_up');
+    $font_down = document.getElementById('font_down');
+    $random = document.getElementById('random');
+
 
     text = $text.value;
-    label = $label.value;
-    color = $color.value;
-
+    author = $author.value;
+    color = hexToRgb($color.value);
     bind();
     draw();
+}
+function update(){
+    update_random();
+}
+
+
+
+function update_random(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (picture_base64) {
+        var image = new Image();
+        image.onload = function() {
+            ctx.drawImage(image, 0, 0);
+            draw()
+        };
+        image.src = picture_base64; 
+    } else {
+        draw();
+    }
 }
 
 function bind () {
@@ -32,35 +57,65 @@ function bind () {
         this.href = dt;
     }
 
-    $valid.onclick = function(e) {
+    $text.onkeyup =  function(e) {
         text = $text.value;
-        label = $label.value;
-        color = $color.value;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        draw();
+        update();
     }
+    $author.onkeyup = function(e) {
+        author = $author.value;
+        update();
+    }
+
+
+    $color.onchange = function(e) {
+        color = hexToRgb($color.value);
+        update();
+    }
+
+    $font_up.onclick = function(){
+       font_size +=   5; 
+        update();
+
+    }
+
+    $font_down.onclick = function(){
+       font_size -=  5; 
+        update();  
+    }
+
+    $random.onclick = function(){
+        $.ajax({
+          url: "http://quotesapi.benjaminbeguin.com/api/v1/quotes/random",
+            error: function() {
+                alert('error serveur')
+            },
+            success: function(data) {
+                author = data.data.author
+                text = data.data.content
+                update_random();
+            },
+            type: 'GET'
+        });
+    }
+
+
+
+    $file.onchange = function(){
+        console.log("change")
+        previewImageUploaded(this);
+    } 
 }
 
 
 function draw () {
-    var picture_url = "http://drscdn.500px.org/photo/153313177/m%3D2048_k%3D1_a%3D1/<76c5083f3a929889b34e46459eb5c069></76c5083f3a929889b34e46459eb5c069>";
 
-    
-    var imageUrl = picture_url;
-    var convertFunction = convertFileToDataURLviaFileReader(imageUrl, function(base64Img){
-        picture_base64 = base64Img;
+    if (picture_base64) {
+        opacity = 0.08;
+    } else {
+        opacity = 1
+    }
 
-        var image = new Image();
-        image.onload = function() {
-            ctx.drawImage(image, 0, 0);
-        };
-
-        image.src = picture_base64;
-
-    })
-
-
-    ctx.fillStyle = color;
+    ctx.fillStyle = "rgba(" + color.r + "," + color.g + "," + color.b + ", "+opacity+")" ;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.textAlign="center"; 
@@ -72,7 +127,7 @@ function draw () {
 
 function wrapText() {
 
-    var fontSize = 120,
+    var fontSize = font_size,
         width = canvas.width - PADDING_SIDE,
         lines = [],
         line = '',
@@ -89,7 +144,7 @@ function wrapText() {
         // Check total width of line or last word
         if (ctx.measureText(lineTest).width > width) {
             // Calculate the new height
-            currentY = lines.length * fontSize + fontSize;
+            currentY = lines.length * fontSize + fontSize ;
 
             // Record and reset the current line
             lines.push({ text: line, height: currentY });
@@ -102,15 +157,27 @@ function wrapText() {
     // Catch last line in-case something is left over
     if (line.length > 0) {
         currentY = lines.length * fontSize + fontSize;
-        lines.push({ text: line.trim(), height: currentY + LETTER_SPACING });
-        totalHeight += currentY;
-        centerY = (canvas.height - canvas.height/3 - totalHeight)/2;
+        lines.push({ text: line.trim(), height: currentY });
+        totalHeight = currentY;
+        centerY = (canvas.height - totalHeight)/2 ;
+
+        console.log(centerY*2 + totalHeight);
     }
 
     // Visually output text
+
+    ctx.shadowColor = "#515151";
+    ctx.shadowOffsetX = 1; 
+    ctx.shadowOffsetY = 1; 
+    ctx.shadowBlur = 0;
     for (var i = 0, len = lines.length; i < len; i++) {
-      ctx.fillText(lines[i].text, canvas.width/2, lines[i].height + centerY);
+      canvas_text = ctx.fillText(lines[i].text, canvas.width/2, lines[i].height + centerY + LETTER_SPACING*i);
     }
+
+    ctx.font = 30 + 'px Arial';
+    ctx.fillText(author, canvas.width/2, lines[lines.length - 1].height + centerY + 50 + LETTER_SPACING * lines.length - 1 );
+
+
 }
 
   
