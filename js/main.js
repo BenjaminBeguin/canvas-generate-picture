@@ -60,10 +60,26 @@ function update_picture(){
 }
 
 function bind () {
+
+
     //download image
     $download.onclick = function(e){
         var dt = canvas.toDataURL('image/jpeg');
         this.href = dt;
+
+        var $form = $('#form');        
+
+      
+        $.ajax({
+            url: $form.attr('action'),
+            type: 'post',
+            data: data = {dt},
+            success: function (response) {
+                // La réponse du serveur
+            }
+        });
+
+
     }
 
     //update field
@@ -136,7 +152,10 @@ function bind () {
 
 
 function draw () {
- 
+    if (!picture_base64) {
+        ctx.fillStyle = '#ffffff';    
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
     ctx.fillStyle = "rgba(" + color.r + "," + color.g + "," + color.b + ", "+opacity+")" ;
     ctx.fillRect(0, 0, canvas.width, canvas.height);

@@ -12,18 +12,20 @@
 			<div class="aside">
 				<div class="controls">
 					
-				    <form class="file_form" action="#" enctype="multipart/form-data">
+				    <form class="file_form" method="post" action="process_form.php" id="form" enctype="multipart/form-data">
+				    
 				    	<label for="file">Picture</label>
-				    	<input type="file" id="file">
+				    	<input name="picture" type="file" id="file">
 
 				    	<label for="color">Color</label>
-				    	<input type="color" id="color" value="#4b9478">
+				    	<input name="color" type="color" id="color" value="#4b9478">
 
 				    	<label for="range">Color opacity</label>
-					    <input type="range" id='range' min="0" max="100" step="1" value="50">
+					    <input name="range" type="range" id='range' min="0" max="100" step="1" value="50">
 					    <button id="font_up"><i class="fa fa-font" aria-hidden="true"></i>+</button>
 					    <button id="font_down"><i class="fa fa-font" aria-hidden="true"></i>-</button>
 					    <button id="valid" style="display: none" >Valider</button>
+					    <button type="submit">OK</button>
 				   		<a href="#" id="download" download="picture.jpg">Download as image</a>
 				    </form>
 
