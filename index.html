@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="js/function.js"></script>
@@ -8,17 +9,39 @@
 
 	<body>
 		<div class="container">
-		    <textarea  id="text">Lorem ipsum dolor sit amet, dolor sit amet, dolor sit amet,  </textarea>
-		    <input type="text" id="author" value="author">
-		    <input type="color" id="color" value="#fff">
-		    <span id="font_up">Font + </span>
-		    <span id="font_down">Font - </span>
-		    <input type="file" id="file">
-		    <button id="valid">Valider</button>
-		    <button id="random">Random quote</button>
-		    <canvas width="1920" height="1080" id="cvs"></canvas>
+			<div class="aside">
+				<div class="controls">
+					
+				    <form class="file_form" action="#" enctype="multipart/form-data">
+				    	<label for="file">Picture</label>
+				    	<input type="file" id="file">
+
+				    	<label for="color">Color</label>
+				    	<input type="color" id="color" value="#4b9478">
+
+				    	<label for="range">Color opacity</label>
+					    <input type="range" id='range' min="0" max="100" step="1" value="50">
+					    <button id="font_up"><i class="fa fa-font" aria-hidden="true"></i>+</button>
+					    <button id="font_down"><i class="fa fa-font" aria-hidden="true"></i>-</button>
+					    <button id="valid" style="display: none" >Valider</button>
+				   		<a href="#" id="download" download="picture.jpg">Download as image</a>
+				    </form>
+
+				</div>	
+			</div>
+			<div class="picture">
+				<div class="controlsWrapper">
+					<button id="random">Get a random quote</button>
+					<div class="clear"></div>
+				    <input type="text" id="text" value="They told me i couln't, that's why i did">  
+				    <input type="text" id="author" value="Unknow">
+				    <div class="clear"></div>
+				</div>
+				<div class="canvas">
+			    	<canvas width="1920" height="1080" id="cvs"></canvas>
+				</div>	
+			</div>
 		    
-		    <a href="#" id="download" download="picture.jpg">Download as image</a>
 		</div>
 	</body>
 </html>
