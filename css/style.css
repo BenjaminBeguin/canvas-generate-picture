@@ -1,9 +1,14 @@
 // a bit ugly css job
 // i know i know
-// where is sass / less ? 
-// maybe i have other stuff to do 
+// where is sass / less ?
+// maybe i have other stuff to do
 // js <3
 
+
+// global
+* {
+	box-sizing: border-box;
+}
 body {
 	background: white;
 	margin : 0;
@@ -11,13 +16,11 @@ body {
 	padding-top: 10px;
 }
 
-* {
-	box-sizing: border-box;
-}
-
 .clear {
 	clear: both;
 }
+
+// container
 
 .container {
     margin: 0 auto;
@@ -67,7 +70,7 @@ input, button, a {
 
 }
 
-input:hover, button:hover{
+input:hover, button:hover {
 	border-color : green;
 	cursor: pointer;
 }
@@ -96,13 +99,11 @@ input:focus {
 	margin-left: 2%;
 }
 
-#random{
+#random {
 	width: 100%;
 	margin-bottom: 10px;
 	font-size: 20px;
 }
-
-
 
 .file_form input, .file_form button {
 	margin-bottom: 10px;
@@ -111,11 +112,11 @@ input:focus {
 	width: 100%;
 }
 
-.file_form a{
+.file_form a {
 	padding: 0 10px;
 }
 
-.aside .controls{
+.aside .controls {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -125,7 +126,7 @@ input:focus {
     align-items: center;
 }
 
-.file_form input#file{
+.file_form input#file {
 	position: relative;
 	background-color: #fcfcfc;
 	background-size: cover;
@@ -161,6 +162,17 @@ label {
 	display: block;
 	margin-top: 10px;
 	font-family: 'Arial'
+}
+
+.picture_saved {
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.picture_saved img {
+	max-width: 60%;
+	margin: 0 auto;
 }
 
 

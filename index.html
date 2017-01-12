@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 	<meta charset="utf-8" />
+	<link href='<a href="http://fonts.googleapis.com/css?family=Ubuntu'">http://fonts.googleapis.com/css?family=Ubuntu'</a> rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,9 +12,8 @@
 		<div class="container">
 			<div class="aside">
 				<div class="controls">
-					
 				    <form class="file_form" method="post" action="process_form.php" id="form" enctype="multipart/form-data">
-				    
+
 				    	<label for="file">Picture</label>
 				    	<input name="picture" type="file" id="file">
 
@@ -25,25 +25,22 @@
 					    <button id="font_up"><i class="fa fa-font" aria-hidden="true"></i>+</button>
 					    <button id="font_down"><i class="fa fa-font" aria-hidden="true"></i>-</button>
 					    <button id="valid" style="display: none" >Valider</button>
-					    <button type="submit">OK</button>
 				   		<a href="#" id="download" download="picture.jpg">Download as image</a>
 				    </form>
-
-				</div>	
+				</div>
 			</div>
 			<div class="picture">
 				<div class="controlsWrapper">
 					<button id="random">Get a random quote</button>
 					<div class="clear"></div>
-				    <input type="text" id="text" value="They told me i couln't, that's why i did">  
+				    <input type="text" id="text" value="They told me i couln't, that's why i did">
 				    <input type="text" id="author" value="Unknow">
 				    <div class="clear"></div>
 				</div>
 				<div class="canvas">
 			    	<canvas width="1920" height="1080" id="cvs"></canvas>
-				</div>	
+				</div>
 			</div>
-		    
 		</div>
 	</body>
 </html>

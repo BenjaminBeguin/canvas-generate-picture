@@ -1,4 +1,4 @@
-function slugMe (value) {    
+function slugMe (value) {
     var rExps=[
         {re:/[\xC0-\xC6]/g, ch:'A'},
         {re:/[\xE0-\xE6]/g, ch:'a'},
@@ -49,38 +49,35 @@ function hexToRgb(hex) {
 
 function drawImageScaled(img, ctx) {
     var canvas = ctx.canvas ;
-    canvas.width = 1920;    
-    canvas.height = 1080;  
-     
-   var hRatio = canvas.width  / img.width    ;
-   var vRatio =  canvas.height / img.height  ;
-   var ratio  = Math.min ( hRatio, vRatio );
+    canvas.width = 1920;
+    canvas.height = 1080;
 
-    canvas.width = img.width*ratio;    
-    canvas.height = img.height*ratio;  
+    var hRatio = canvas.width  / img.width    ;
+    var vRatio =  canvas.height / img.height  ;
+    var ratio  = Math.min ( hRatio, vRatio );
 
-   var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-   var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-   ctx.clearRect(0,0,canvas.width, canvas.height);
+    canvas.width = img.width*ratio;
+    canvas.height = img.height*ratio;
 
-
-   ctx.drawImage(img, 0,0, img.width, img.height,
-                      centerShift_x,centerShift_y,img.width*ratio, img.height*ratio); 
+    var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+    var centerShift_y = ( canvas.height - img.height*ratio ) / 2;
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.drawImage(img, 0,0, img.width, img.height, centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
 }
 
 
 function previewImageUploaded (context) {
-
     if(context.files && context.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(e) {  
+        reader.onload = function(e) {
 
             var image = new Image();
             image.onload = function() {
                 drawImageScaled(image, ctx)
                 draw()
             };
-            image.src = e.target.result; 
+
+            image.src = e.target.result;
             picture_base64 = e.target.result;
 
         }
