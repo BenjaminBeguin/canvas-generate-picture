@@ -6,7 +6,7 @@
 
 ### Demo
 
-You can try it here : [Demo](https://quote-picture.benjaminbeguin.com).
+You can try it here : [Demo](http://quote-picture.benjaminbeguin.com).
 
 #### If you want to take a look at the code
 
