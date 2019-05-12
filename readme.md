@@ -11,7 +11,7 @@ You can try it here : [Demo](http://quote-picture.benjaminbeguin.com).
 #### If you want to take a look at the code
 
 ```sh
-$ git pull https://github.com/BenjaminBeguin/canvas-generate-picture.git
+$ git clone https://github.com/BenjaminBeguin/canvas-generate-picture.git
 ```
 
 
